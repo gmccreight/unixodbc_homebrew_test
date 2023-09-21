@@ -2,12 +2,61 @@
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 | COUNT(*)                                                                                                                                |
 +-----------------------------------------------------------------------------------------------------------------------------------------+
-| 4688528102                                                                                                                              |
+| <REDACTED BUT WAS A GOOD VALUE>
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 SQLRowCount returns 1
 1 rows fetched
 
 
---- a count on a non-existent table
-./run_isql: line 48: 34874 Done                    echo "select count(*) from catalog.catalog.some_nonexistent_table"
-     34875 Abort trap: 6           | isql -b MySnowflakeDSN
+
+--- a count on a non-existent table like select count(*) from catalog.catalog.some_nonexistent_table
+./run_isql: line 51: 66506 Done                    echo "select count(*) from catalog.catalog.some_nonexistent_table"
+     66507 Abort trap: 6           | isql -b MySnowflakeDSN
+
+
+
+--- The driver manager trace for the non-existent table query
+[ODBC][66507][1695313268.780972][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x155814e00
+[ODBC][66507][1695313268.781168][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x155814e00
+[ODBC][66507][1695313268.781240][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x15581ce00
+[ODBC][66507][1695313268.781302][SQLConnect.c][4060]
+		Entry:
+			Connection = 0x15581ce00
+			Server Name = [MySnowflakeDSN][length = 14 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][66507][1695313269.120651][SQLConnect.c][4696]
+		Exit:[SQL_SUCCESS]
+[ODBC][66507][1695313269.120788][SQLGetFunctions.c][151]
+		Entry:
+			Connection = 0x15581ce00
+			Id = SQLMoreResults
+			Supported = 0x1048c000c
+[ODBC][66507][1695313269.121520][SQLGetFunctions.c][209]
+		Exit:[SQL_SUCCESS]
+			Supported = 0x1048c000c -> 1
+[ODBC][66507][1695313269.121619][SQLAllocHandle.c][632]
+		Entry:
+			Handle Type = 3
+			Input Handle = 0x15581ce00
+[ODBC][66507][1695313269.122599][SQLAllocHandle.c][1177]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x156028200
+[ODBC][66507][1695313269.122694][SQLPrepare.c][196]
+		Entry:
+			Statement = 0x156028200
+			SQL = [select count(*) from catalog.catalog.some_nonexistent_table][length = 59]
+[ODBC][66507][1695313269.359366][SQLPrepare.c][377]
+		Exit:[SQL_ERROR]
+		DIAG [S] S

@@ -2,11 +2,84 @@
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 | COUNT(*)                                                                                                                                |
 +-----------------------------------------------------------------------------------------------------------------------------------------+
-| <GOOD RESULT BUT REDACTED>
+| <REDACTED BUT GOOD VALUE>
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 SQLRowCount returns 1
 1 rows fetched
 
 
---- a count on a non-existent table
+
+--- a count on a non-existent table like select count(*) from catalog.catalog.some_nonexistent_table
 [ISQL]ERROR: Could not SQLPrepare
+
+
+
+--- The driver manager trace for the non-existent table query
+[ODBC][50990][1695313063.529975][__handles.c][499]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x11e814800
+[ODBC][50990][1695313063.530217][SQLAllocHandle.c][395]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x11e814800
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][50990][1695313063.530410][SQLAllocHandle.c][531]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x11e81c800
+[ODBC][50990][1695313063.530495][SQLConnect.c][3860]
+		Entry:
+			Connection = 0x11e81c800
+			Server Name = [MySnowflakeDSN][length = 14 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+[ODBC][50990][1695313063.864973][SQLConnect.c][4496]
+		Exit:[SQL_SUCCESS]
+[ODBC][50990][1695313063.865343][SQLGetFunctions.c][151]
+		Entry:
+			Connection = 0x11e81c800
+			Id = SQLMoreResults
+			Supported = 0x10205000c
+[ODBC][50990][1695313063.866093][SQLGetFunctions.c][209]
+		Exit:[SQL_SUCCESS]
+			Supported = 0x10205000c -> 1
+[ODBC][50990][1695313063.866206][SQLAllocHandle.c][578]
+		Entry:
+			Handle Type = 3
+			Input Handle = 0x11e81c800
+[ODBC][50990][1695313063.867272][SQLAllocHandle.c][1123]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x11e0cde00
+[ODBC][50990][1695313063.867370][SQLPrepare.c][196]
+		Entry:
+			Statement = 0x11e0cde00
+			SQL = [select count(*) from catalog.catalog.some_nonexistent_table][length = 59]
+[ODBC][50990][1695313064.321493][SQLPrepare.c][377]
+		Exit:[SQL_ERROR]
+		DIAG [S] S
+
+[ODBC][50990][1695313064.322421][SQLFreeStmt.c][144]
+		Entry:
+			Statement = 0x11e0cde00
+			Option = 1
+[ODBC][50990][1695313064.322528][SQLFreeHandle.c][387]
+		Entry:
+			Handle Type = 3
+			Input Handle = 0x11e0cde00
+[ODBC][50990][1695313064.323238][SQLFreeHandle.c][490]
+		Exit:[SQL_SUCCESS]
+[ODBC][50990][1695313064.323731][SQLDisconnect.c][208]
+		Entry:
+			Connection = 0x11e81c800
+[ODBC][50990][1695313064.381914][SQLDisconnect.c][358]
+		Exit:[SQL_SUCCESS]
+[ODBC][50990][1695313064.382128][SQLFreeHandle.c][290]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x11e81c800
+[ODBC][50990][1695313064.382258][SQLFreeHandle.c][339]
+		Exit:[SQL_SUCCESS]
+[ODBC][50990][1695313064.382373][SQLFreeHandle.c][220]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x11e814800

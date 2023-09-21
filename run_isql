@@ -43,13 +43,16 @@ echo "select count(*) from $legit_table" | isql -b MySnowflakeDSN
 
 echo
 echo
+echo
 
 
-echo "--- a count on a non-existent table"
+echo "--- a count on a non-existent table like select count(*) from catalog.catalog.some_nonexistent_table"
 rm ~/snowflake_odbc_trace.log
 echo "select count(*) from catalog.catalog.some_nonexistent_table" | isql -b MySnowflakeDSN
 
 echo
 echo
+echo
 
+echo "--- The driver manager trace for the non-existent table query"
 cat ~/snowflake_odbc_trace.log
