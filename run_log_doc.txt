@@ -1,0 +1,211 @@
+Here's what the output of ./run looks like after it has been run more than once.
+
+Uninstalling /opt/homebrew/Cellar/unixodbc/2.3.13pre... (45 files, 2.2MB)
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+##################################################################################################################################### 100.0%
+Error: Failed to load cask: unixodbc.rb
+Cask 'unixodbc' is unreadable: wrong constant name #<Class:0x00000001180545b0>
+Warning: Treating unixodbc.rb as a formula.
+==> Fetching unixodbc
+==> Downloading ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.13pre.tar.gz
+Already downloaded: /Users/gordonmccreight/Library/Caches/Homebrew/downloads/a4f83ff9260d18b8321d07f5b7dae3d5f7924067fdf74d393b2c9b59b30da8f3--unixODBC-2.3.13pre.tar.gz
+Warning: Cannot verify integrity of 'a4f83ff9260d18b8321d07f5b7dae3d5f7924067fdf74d393b2c9b59b30da8f3--unixODBC-2.3.13pre.tar.gz'.
+No checksum was provided.
+For your reference, the checksum is:
+  sha256 "a31ff005cd5871f979821ac7eec43c472ca307ead86ca2a10d59e476034a49b3"
+==> ./configure --sysconfdir=/opt/homebrew/etc --enable-static --enable-gui=no
+==> make install
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+##################################################################################################################################### 100.0%
+🍺  /opt/homebrew/Cellar/unixodbc/2.3.13pre: 45 files, 2.2MB, built in 40 seconds
+==> Running `brew cleanup unixodbc`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+unixODBC 2.3.13pre
+DRIVERS............: /opt/homebrew/etc/odbcinst.ini
+SYSTEM DATA SOURCES: /opt/homebrew/etc/odbc.ini
+FILE DATA SOURCES..: /opt/homebrew/etc/ODBCDataSources
+USER DATA SOURCES..: /Users/gordonmccreight/.odbc.ini
+SQLULEN Size.......: 8
+SQLLEN Size........: 8
+SQLSETPOSIROW Size.: 8
+checking for version.h... no
+checking for ruby/version.h... yes
+checking for sql.h... yes
+checking for sqlext.h... yes
+checking for SQLTCHAR in sqltypes.h... yes
+checking for SQLLEN in sqltypes.h... yes
+checking for SQLULEN in sqltypes.h... yes
+checking for odbcinst.h... yes
+checking for SQLROWOFFSET in sqltypes.h... no
+checking for odbcinst.h... yes
+checking for SQLROWSETSIZE in sqltypes.h... no
+checking for odbcinst.h... yes
+checking for SQLAllocConnect() in -lodbc... yes
+checking for SQLConfigDataSource() in -lodbcinst... yes
+checking for SQLInstallerError() in odbcinst.h... yes
+checking for SQLBIGINT in sqltypes.h with -DHAVE_LONG_LONG... yes
+creating Makefile
+linking shared-object odbc.bundle
+/usr/bin/install -c -m 0755 odbc.bundle /Users/gordonmccreight/.rbenv/versions/3.0.5/lib/ruby/site_ruby/3.0.0/arm64-darwin22
+SQLCall: SQLAllocConnect
+  > HENV=0x12f00b000, HDBC=0x0, HSTMT=0x0
+  < SQL_SUCCESS
+SQLCall: SQLConnect('MySnowflakeDSN')
+  > HENV=0x0, HDBC=0x12f0ee000, HSTMT=0x0
+  < SQL_SUCCESS
+SQLCall: SQLAllocStmt
+  > HENV=0x0, HDBC=0x12f0ee000, HSTMT=0x0
+  < SQL_SUCCESS
+SQLCall: SQLPrepare('select id, source_type from instadata.rds_data.product_sources limit 4')
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLNumParams
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLNumResultCols
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_LABEL)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TABLE_NAME)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_DESC_LENGTH)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_NULLABLE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_SCALE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_PRECISION)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_SEARCHABLE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_UNSIGNED)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_AUTO_INCREMENT)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_LABEL)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TABLE_NAME)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_DESC_LENGTH)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_NULLABLE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_SCALE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_PRECISION)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_SEARCHABLE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_UNSIGNED)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_AUTO_INCREMENT)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLFreeStmt(SQL_CLOSE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLFreeStmt(SQL_RESET_PARMS)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLExecute
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLFreeStmt(SQL_RESET_PARAMS)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLNumParams
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLNumResultCols
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_TYPE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+SQLCall: SQLColAttributes(SQL_COLUMN_DISPLAY_SIZE)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_SUCCESS
+expecting an id and a source type
+SQLCall: SQLFetchScroll(SQL_FETCH_FIRST)
+  > HENV=0x0, HDBC=0x0, HSTMT=0x11f80a000
+  < SQL_ERROR
+./compile_and_test: line 9: 90596 Abort trap: 6           ruby -I ../lib test_gordon.rb "MySnowflakeDSN"
+
+
+[ODBC][90596][1695259344.284031][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x12f00b000
+[ODBC][90596][1695259344.284204][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x12f00b000
+[ODBC][90596][1695259344.284272][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x12f0ee000
