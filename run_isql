@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Check the first argument
+if [ "$1" != "11" ] && [ "$1" != "13pre" ]; then
+    echo "You must provide either '11' or '13pre' as the first argument."
+    exit 1
+fi
+
+if [[ "$2" != "catalog.catalog."* ]]; then
+    echo "Error: Please provide a legit catalog.catalog table for the second argument."
+    exit 1
+fi
+
+patch_num="$1"
+legit_table="$2"
+
+# Generate the URL based on the patch number
+if [ "$patch_num" == "11" ]; then
+    url="https://www.unixodbc.org/unixODBC-2.3.11.tar.gz"
+elif [ "$patch_num" == "13pre" ]; then
+    url="ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.13pre.tar.gz"
+fi
+
+sed -i '' "s|url \".*\"|url \"$url\"|" unixodbc.rb
+# grep -B2 -A2 url unixodbc.rb
+
+
+# This is a little hacky.  Could probably do inline if I worked on it.
+sed "/^[[:space:]]*[^#[:space:]]*ODBCInstLib/ {
+    s@ODBCInstLib.*@ODBCInstLib=/opt/homebrew/Cellar/unixodbc/2.3.${patch_num}/lib/libodbcinst.dylib@
+    q
+}" /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini > ~/altered.ini
+
+# grep -B2 -A2 ODBCInstLib ~/altered.ini
+sudo mv ~/altered.ini /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini
+
+brew uninstall --ignore-dependencies unixodbc
+brew install unixodbc.rb -s
+odbc_config --version
+
+echo "--- a count on a legit table"
+echo "select count(*) from $legit_table" | isql -b MySnowflakeDSN
+
+echo
+echo
+
+
+echo "--- a count on a non-existent table"
+rm ~/snowflake_odbc_trace.log
+echo "select count(*) from catalog.catalog.some_nonexistent_table" | isql -b MySnowflakeDSN
+
+echo
+echo
+
+cat ~/snowflake_odbc_trace.log
