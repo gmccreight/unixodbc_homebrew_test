@@ -1,15 +1,14 @@
 class Unixodbc < Formula
   desc "ODBC 3 connectivity for UNIX"
   homepage "https://www.unixodbc.org/"
+  # url "https://www.unixodbc.org/unixODBC-2.3.11.tar.gz"
   url "ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.13pre.tar.gz"
   license "LGPL-2.1-or-later"
 
   # I eliminated these because they were unnecessary
   #   mirror
   #   sha256
-
-
-  # I eliminated the livecheck block and the bottle block, too.
+  # I also eliminated the livecheck block and the bottle block, too.
 
   depends_on "libtool"
 
