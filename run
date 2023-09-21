@@ -1,0 +1,30 @@
+#!/bin/bash
+
+ #brew uninstall --ignore-dependencies unixodbc
+ #
+ #brew install unixodbc.rb -s
+ #
+ #odbcinst -j
+
+# unixODBC 2.3.13pre
+# DRIVERS............: /opt/homebrew/etc/odbcinst.ini
+# SYSTEM DATA SOURCES: /opt/homebrew/etc/odbc.ini
+# FILE DATA SOURCES..: /opt/homebrew/etc/ODBCDataSources
+# USER DATA SOURCES..: /Users/gordonmccreight/.odbc.ini
+# SQLULEN Size.......: 8
+# SQLLEN Size........: 8
+# SQLSETPOSIROW Size.: 8
+
+
+# In /opt/homebrew/etc/odbcinst.ini I had this set, to enable tracing:
+
+# [ODBC]
+# Trace=Yes
+# TraceFile=/Users/gordonmccreight/snowflake_odbc_trace.log
+
+(
+  rm ~/snowflake_odbc_trace.log
+  cd ~/ruby-odbc-0.999991
+  ./compile_and_test
+  head ~/snowflake_odbc_trace.log
+)
