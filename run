@@ -1,11 +1,13 @@
 #!/bin/bash
 
- #brew uninstall --ignore-dependencies unixodbc
- #
- #brew install unixodbc.rb -s
- #
- #odbcinst -j
+brew uninstall --ignore-dependencies unixodbc
 
+brew install unixodbc.rb -s
+
+odbcinst -j
+
+# Success!  It installed the 2.3.13pre
+#
 # unixODBC 2.3.13pre
 # DRIVERS............: /opt/homebrew/etc/odbcinst.ini
 # SYSTEM DATA SOURCES: /opt/homebrew/etc/odbc.ini
@@ -24,7 +26,11 @@
 
 (
   rm ~/snowflake_odbc_trace.log
+
+  # From https://github.com/gmccreight/ruby-odbc
   cd ~/ruby-odbc-0.999991
   ./compile_and_test
+
+  # Just show it worked... you can cat it in the terminal, later
   head ~/snowflake_odbc_trace.log
 )
