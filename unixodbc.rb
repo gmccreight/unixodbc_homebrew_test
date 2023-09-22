@@ -19,7 +19,9 @@ class Unixodbc < Formula
   link_overwrite "lib/libodbc.a", "lib/libodbc.so"
 
   def install
-    system "./configure", "--disable-debug",
+                          # Gordon added this
+    system "./configure", "CFLAGS=-DSQL_WCHART_CONVERT",
+                          "--disable-debug",
                           "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
                           "--sysconfdir=#{etc}",
