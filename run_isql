@@ -14,28 +14,35 @@ fi
 patch_num="$1"
 legit_table="$2"
 
-# Generate the URL based on the patch number
-if [ "$patch_num" == "11" ]; then
-    url="https://www.unixodbc.org/unixODBC-2.3.11.tar.gz"
-elif [ "$patch_num" == "13pre" ]; then
-    url="ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.13pre.tar.gz"
-fi
-
-sed -i '' "s|url \".*\"|url \"$url\"|" unixodbc.rb
-# grep -B2 -A2 url unixodbc.rb
-
-
-# This is a little hacky.  Could probably do inline if I worked on it.
-sed "/^[[:space:]]*[^#[:space:]]*ODBCInstLib/ {
-    s@ODBCInstLib.*@ODBCInstLib=/opt/homebrew/Cellar/unixodbc/2.3.${patch_num}/lib/libodbcinst.dylib@
-    q
-}" /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini > ~/altered.ini
-
-# grep -B2 -A2 ODBCInstLib ~/altered.ini
-sudo mv ~/altered.ini /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini
+# # Generate the URL based on the patch number
+# if [ "$patch_num" == "11" ]; then
+#     url="https://www.unixodbc.org/unixODBC-2.3.11.tar.gz"
+# elif [ "$patch_num" == "13pre" ]; then
+#     url="ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.13pre.tar.gz"
+# fi
+# 
+# sed -i '' "s|url \".*\"|url \"$url\"|" unixodbc.rb
+# # grep -B2 -A2 url unixodbc.rb
+# 
+# 
+# # This is a little hacky.  Could probably do inline if I worked on it.
+# sed "/^[[:space:]]*[^#[:space:]]*ODBCInstLib/ {
+#     s@ODBCInstLib.*@ODBCInstLib=/opt/homebrew/Cellar/unixodbc/2.3.${patch_num}/lib/libodbcinst.dylib@
+#     q
+# }" /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini > ~/altered.ini
+# 
+# # grep -B2 -A2 ODBCInstLib ~/altered.ini
+# sudo mv ~/altered.ini /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake.ini
 
 brew uninstall --ignore-dependencies unixodbc
-brew install unixodbc.rb -s
+# brew install unixodbc.rb -s --verbose
+
+(
+  cd ~/unixODBC-2.3.$patch_num
+  CFLAGS=-DSQL_WCHART_CONVERT ./configure --disable-debug --disable-dependency-tracking --prefix=/opt/homebrew/Cellar/unixodbc/2.3.13pre --sysconfdir=/opt/homebrew/etc --enable-static --enable-gui=no
+  make install
+)
+
 odbc_config --version
 
 echo "--- a count on a legit table"
