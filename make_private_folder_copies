@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# This is a separate script you can run to copy the temporary private
+# folders that homebrew creates while installing a package.
+# There's probably a more correct way of doing this, like telling it to
+# install into a directory that doesn't automatically get deleted, but
+# I didn't look into that.
+
 dir=$1
 
 rm -rf /tmp/homebrew_install_private_folder_copies
