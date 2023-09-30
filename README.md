@@ -4,4 +4,4 @@
 
 It shows that on version `13pre` the program will crash if the table is non-existent.
 
-The 
+The `run_isql_2_3_13pre_doc.txt` file shows the output of the run where it crashes.
