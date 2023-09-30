@@ -1,5 +1,7 @@
 # unixodbc_homebrew_test
 
-Installs a custom version of unixodbc for testing via homebrew,
-then runs the ./compile_and_test script in the https://github.com/gmccreight/ruby-odbc repo to
-repo to see if things work or not.
+`./run_isql` installs one of two different versions of unixodbc from homebrew, then runs a couple `isql` commands.
+
+It shows that on version `13pre` the program will crash if the table is non-existent.
+
+The 
