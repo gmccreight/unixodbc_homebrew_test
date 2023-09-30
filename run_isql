@@ -37,15 +37,6 @@ sudo mv ~/altered.ini /opt/snowflake/snowflakeodbc/lib/universal/simba.snowflake
 brew uninstall --ignore-dependencies unixodbc
 brew install unixodbc.rb -s --verbose
 
-# (
-#   cd ~/unixODBC-2.3.$patch_num
-#   CFLAGS=-DSQL_WCHART_CONVERT ./configure --disable-debug --disable-dependency-tracking --prefix=/opt/homebrew/Cellar/unixodbc/2.3.13pre --sysconfdir=/opt/homebrew/etc --enable-static --enable-gui=no
-#   cd libltdl
-#   CFLAGS=-DSQL_WCHART_CONVERT ./configure --disable-option-checking '--prefix=/opt/homebrew/Cellar/unixodbc/2.3.13pre'  '--disable-debug' '--disable-dependency-tracking' '--sysconfdir=/opt/homebrew/etc' '--enable-static' '--enable-gui=no' 'CC=clang' --cache-file=/dev/null --srcdir=.
-#   cd ..
-#   make install
-# )
-
 odbc_config --version
 
 echo "--- a count on a legit table"
