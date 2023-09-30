@@ -1,3 +1,7 @@
+# This is a slightly modified version of the Homebrew formula for unixodbc.
+# the `run_isql` file also modifies it to update the URL so that the right
+# version of unixodbc is downloaded for the test run.
+
 class Unixodbc < Formula
   desc "ODBC 3 connectivity for UNIX"
   homepage "https://www.unixodbc.org/"
